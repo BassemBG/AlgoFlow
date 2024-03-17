@@ -1,0 +1,27 @@
+.background {
+    /*
+    * Created with https://www.css-gradient.com
+    * Gradient link: https://www.css-gradient.com/?c1=d9131c&c2=5c0c82&gt=l&gd=dtt
+    */
+    background: rgba(217, 19, 28, 1.0);
+    background: linear-gradient(180deg, rgba(217, 19, 28, 1.0), rgba(92, 12, 130, 1.0));
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+footer {
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+
+    width: 100%;
+    text-align: center;
+    font-size: x-small;
+    margin-top: auto;
+}
+
+@media (max-width: 576px) {
+    /* Adjust font size for screens smaller than 576px (e.g., mobile) */
+    footer {
+        font-size: smaller;
+    }
+}

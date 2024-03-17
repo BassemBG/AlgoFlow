@@ -1,0 +1,77 @@
+/*.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+
+.viz {
+    display: flex;
+    align-items: flex-end;
+    width: 100%;
+
+}
+*/
+
+
+body {
+    margin: 0;
+    padding: 0;
+  }
+
+h1 {
+    font-family: italiana;
+    color: rgb(63, 3, 63);
+}
+
+h3 {
+    font-family: Jomhuria;
+}
+
+h3:hover {
+    cursor: pointer;
+}
+
+.viz-container {
+    background-color: aliceblue;
+    padding: 2rem 2rem 0 2rem;
+    opacity: 0.8;
+}
+
+.bar {
+    position: relative;
+    flex: 1;
+    margin: 0px 1px; /* Adjust the margin between bars */
+    /*width: calc(100% / var(--number-of-bars)); /* Calculate width based on total divs*/
+    transition: 0.2s all ease;
+
+}
+
+.bar-label {
+    position: absolute;
+    top: -20px; /* Adjust the distance of the label from the block */
+    right: 50%;
+  }
+
+  @media (max-width: 767px) {
+    .hidden-on-mobile {
+        display: none;
+    }
+}
+
+.swapping {
+    background-color: rgb(16, 88, 118);
+}
+
+.default {
+    background-color: rgb(31, 175, 219);
+}
+
+.sorted {
+    background-color: rgb(4, 148, 93);
+}
+
+.disabled {
+    cursor: not-allowed;
+}

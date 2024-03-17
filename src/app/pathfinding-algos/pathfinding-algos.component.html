@@ -1,0 +1,59 @@
+<div class="container-fluid ">
+    <div class="row w-100 pt-1">
+        <div class="col">
+            <h3 class="fs-2 text-white pt-1" [routerLink]="['/home']" >AlgoFlow</h3>
+        </div>
+        <div class="col text-end">
+            <h1 class="text-end">Pathfinding</h1>
+        </div>
+    </div>
+
+    <div class="row text-center text-white m-auto mt-3">
+        <div class="col-md-3 col-sm-12 m-auto">
+            <select [(ngModel)]="selectedAlgorithm" class="form-select w-50 m-auto" aria-label="Default select example">
+                <option selected>Choose Algorithm</option>
+                <option value="Dijkstra">Dijkstra</option>
+                <option value="ComingSoon" disabled>Coming Soon</option>
+              </select>
+        </div>
+
+        <div class="col-md-3 col-sm-12 m-auto d-flex flex-column mt-3 mt-md-0">
+            <label for="vizSpeed">Speed of Visualization</label>
+            <input [(ngModel)]="vizSpeed" class="w-50 m-auto" type="range" name="vizSpeed" id="vizSpeed" [disabled]="isPathfinding">    
+        </div>
+
+        <div class="col-md-3 col-sm-12 d-flex flex-md-row flex-column justify-content-around">
+            <button (click)="toggleStartNode()" class="btn rounded-pill mt-3 mt-md-0" [ngClass]="{'btn-success': !toggleChangeStartNode, 'changing-in-progress-start-node': toggleChangeStartNode }" [disabled]="startToggleDisabled" > 
+                <ng-container *ngIf="!toggleChangeStartNode">Change Start Node</ng-container>
+                <ng-container *ngIf="toggleChangeStartNode">Stop Changing</ng-container>              
+            </button>
+            <button (click)="toggleEndNode()" class="btn rounded-pill mt-3 mt-md-0" [ngClass]="{'btn-danger': !toggleChangeEndNode, 'changing-in-progress-end-node': toggleChangeEndNode }"  [disabled]="endToggleDisabled" > 
+                <ng-container *ngIf="!toggleChangeEndNode">Change End Node</ng-container>
+                <ng-container *ngIf="toggleChangeEndNode">Stop Changing</ng-container>    
+            </button>
+        </div>
+
+
+        <div class="col-md-3 col-sm-12 m-auto d-flex justify-content-around mt-3 mt-md-0">
+            <button (click)="visualizeAlgo()" class="btn btn-dark rounded-pill" [class.disabled]="isPathfinding || toggleChangeStartNode || toggleChangeEndNode"> Visualize </button>    
+            <button (click)="reset()" class="btn btn-warning rounded-pill" [class.disabled]="isPathfinding || toggleChangeStartNode || toggleChangeEndNode"> Reset </button>    
+        </div>
+
+    </div>
+        
+    <div class="bg-white container mt-4">
+        <div *ngFor="let node_row of grid; let i = index" class="row  flex-grow-1 ">
+            <div *ngFor="let node of node_row; let i = index" class="col p-0 d-flex align-items-center justify-content-center border disable-selection" (click)="changeNodeType(node)" [ngClass]="{'start-node': node.isStart, 'end-node': node.isEnd, 'visited-node': node.isVisited && !node.isStart && !node.isEnd, 'path-node': node.isPath && !node.isStart && !node.isEnd }">
+                <span>
+                    D=
+                    <span *ngIf="isInfinity(node.distance)">∞</span>
+                    <span *ngIf="!isInfinity(node.distance)">{{ node.distance }}</span>    
+                </span>
+            </div>
+    
+        </div>
+    </div>
+    
+
+    
+</div>

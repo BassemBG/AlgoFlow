@@ -1,0 +1,131 @@
+h1 {
+  font-family: italiana;
+  color: rgb(63, 3, 63);
+}
+
+h3 {
+  font-family: Jomhuria;
+}
+
+h3:hover {
+  cursor: pointer;
+}
+
+.node {
+    flex: 1;
+    outline: 1px solid black;
+}
+
+.disable-selection {
+    user-select: none; /* Disable text selection */
+  }
+
+.border:hover {
+    cursor: pointer;
+}
+
+
+.start-node {
+    background-color: greenyellow;
+}
+
+.end-node {
+    background-color: red;
+}
+
+.visited-node {
+    animation: visitedAnimation 0.5s ease-in-out both;
+    color: white;
+}
+
+
+@keyframes visitedAnimation {
+    0% {
+      transform: scale(0.4);
+      background-color: rgba(135, 28, 98, 0.75);
+      border-radius: 100%;
+    }
+  
+    50% {
+      background-color: rgba(216, 82, 169, 0.75);
+    }
+  
+    75% {
+      transform: scale(1.2);
+      background-color: rgba(207, 63, 157, 0.75);
+    }
+  
+    100% {
+      transform: scale(1);
+      background-color: rgba(42, 5, 102, 0.75);
+    }
+  }
+
+
+.path-node {
+    animation: pathAnimation 0.5s ease-in-out both;
+    color: black;
+}
+
+
+@keyframes pathAnimation {
+    0% {
+      transform: scale(0.4);
+      background-color: green;
+      border-radius: 100%;
+    }
+  
+    50% {
+      background-color: greenyellow;
+    }
+  
+    75% {
+      transform: scale(1.2);
+      background-color: yellowgreen;
+    }
+  
+    100% {
+      transform: scale(1);
+      background-color: yellow;
+    }
+  }  
+
+
+
+  @keyframes glowing-change-start-node {
+    0% { box-shadow: 0 0 20px #4CAF50; }
+    50% { box-shadow: 0 0 40px greenyellow; }
+    100% { box-shadow: 0 0 10px #4CAF50; }
+  }
+  
+  .changing-in-progress-start-node {
+    animation: glowing-change-start-node 1s infinite; /* Apply the glowing animation */
+    background-color: greenyellow; /* Green color */
+    /* You can adjust the color code and animation duration based on your preference */
+  }
+
+  @keyframes glowing-change-end-node {
+    0% { box-shadow: 0 0 20px rgb(212, 68, 15); }
+    50% { box-shadow: 0 0 40px rgb(222, 181, 30); }
+    100% { box-shadow: 0 0 10px rgb(212, 68, 15); }
+  }
+  
+  .changing-in-progress-end-node {
+    animation: glowing-change-end-node 1s infinite; /* Apply the glowing animation */
+    background-color: rgb(212, 68, 15); /* Green color */
+    /* You can adjust the color code and animation duration based on your preference */
+    color: white;
+  }
+
+
+
+.error-dialog-panel {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    z-index: 1000; /* Ensure dialog is on top of other content */
+    background-color: black;
+  }

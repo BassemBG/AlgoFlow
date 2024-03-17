@@ -1,0 +1,46 @@
+
+* {
+    font-family: italiana;
+}
+
+h3 {
+    font-family: Jomhuria;
+}
+
+h3:hover {
+    cursor: pointer;
+}
+
+
+.title {
+    font-size: 6rem;
+    text-shadow:  2px 2px 4px rgba(0, 0, 0, 0.8);
+
+}
+
+.description {
+    font-size: 3vh;
+    text-shadow:  2px 2px 4px rgba(0, 0, 0, 0.8);
+    
+}
+
+button {
+    background-color: #770156;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 25%;
+    border: none;
+    box-shadow: 2px 7px 6px rgb(23, 23, 23);
+}
+
+
+@media (max-width: 576px) {
+    /* Adjust font size for screens smaller than 576px (e.g., mobile) */
+    .title {
+        font-size: 3.5rem;
+    }
+
+    .description {
+        font-size: 2vh;
+    }
+}

@@ -1,0 +1,48 @@
+<div class="container-fluid">
+    <div class="d-flex flex-column align-items-center ">
+        <div class="row w-100">
+            <div class="col">
+                <h3 class="fs-2 text-white pt-1" [routerLink]="['/home']" >AlgoFlow</h3>
+            </div>
+            <div class="col text-end">
+                <h1 class="text-end">Sorting</h1>
+            </div>
+        </div>
+        <div class="row text-center text-white mt-3 w-75">
+                <div class="col-md-3 col-sm-12 m-auto">
+                    <select [(ngModel)]="selectedAlgorithm" class="form-select" aria-label="Default select example">
+                        <option selected>Choose Algorithm</option>
+                        <option value="BubbleSort">Bubble Sort</option>
+                        <option value="ComingSoon" disabled>Coming Soon..</option>
+                      </select>
+                </div>
+
+                <div class="col-md-3 col-sm-12 d-flex flex-column mt-3 mt-md-0">
+                    <label for="barsNumber">Size of Array</label>
+                    <input [(ngModel)]="NUMBER_OF_BARS" class="rounded-pill ps-2 text-center" type="number" name="barsNumber" id="barsNumber" placeholder="Enter number of values">
+                </div>
+
+                <div class="col-md-3 col-sm-12 m-auto mt-3 mt-md-0 d-flex flex-column">
+                    <label for="vizSpeed">Speed of Visualization</label>
+                    <input [(ngModel)]="vizSpeed" type="range" name="vizSpeed" id="vizSpeed">    
+                </div>
+
+                <div class="col-md-3 col-sm-12 m-auto d-flex flex-column flex-md-row justify-content-around">
+                    <button (click)="generateArray()" class="btn btn-outline-light rounded-pill mt-3 mt-md-0" [class.disabled]="isSorting"> Generate </button>
+                    <button (click)="sort()" class="btn btn-dark rounded-pill mt-3 mt-md-0" [class.disabled]="isSorting"> Sort </button>    
+                    <button (click)="pause()" class="btn btn-danger rounded-pill mt-3 mt-md-0" [class.disabled]="!isSorting"> Pause </button>    
+
+                </div>
+                
+
+
+
+        </div>
+        <div class="container row w-100 m-5">
+            <div class="d-flex flex-nowrap align-items-end viz-container">
+                    <div *ngFor="let bar_height of bars_height_array; let i = index" class="bar" [ngClass]="{'swapping': checkSwapping(i), 'default': !checkSwapping(i), 'sorted': checkSorted(i) }" [ngStyle]="{ 'height.px': bar_height }"> <p class="bar-label hidden-on-mobile" > {{bar_height}} </p> </div>
+            </div>
+        </div>
+        
+    </div>
+</div>
