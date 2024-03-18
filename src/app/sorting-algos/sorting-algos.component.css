@@ -51,7 +51,7 @@ h3:hover {
 .bar-label {
     position: absolute;
     top: -20px; /* Adjust the distance of the label from the block */
-    right: 50%;
+    right: 45%;
   }
 
   @media (max-width: 767px) {

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MaxLengthValidator } from '@angular/forms';
 
 @Component({
   selector: 'app-sorting-algos',
@@ -6,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./sorting-algos.component.css'],
 })
 export class SortingAlgosComponent implements OnInit {
-  NUMBER_OF_BARS: number = 10; //get number from user input
+  NUMBER_OF_BARS: number = 20; //get number from user input
   bar_width: number = 0;
   bars_array_before_sorting: number[] = []; // this is used to save old copy of array to use it to reset -> always need to asign it before any sorting
   bars_height_array: number[] = []; //this is only filled manually for testing purposes
@@ -14,22 +15,47 @@ export class SortingAlgosComponent implements OnInit {
   sortedIndexes: number[] = []; //keeps all the blocks who are sorted, this helps to visualize them in green
   isSorting: boolean = false; //helps prevent the user from interrupting the visualization by accident
   selectedAlgorithm: String = 'Choose Algorithm';
-  vizSpeed: number = 50;
-  sound: HTMLAudioElement;
+  vizSpeed: number = 50; 
+  sound: HTMLAudioElement; 
+  maxArrayLength: number; //lets us control the max array length taht a user can generate
+  hideBarLabelsOnPc: boolean = false; // controls the visibility of bar labels (values of bars)
+
   constructor() {
     this.sound = new Audio();
     this.sound.src = './assets/success-sound.mp3';
     this.sound.volume = 0.8;
+    this.maxArrayLength = this.setMaxArrayLength();
   }
 
   ngOnInit(): void {
     this.generateArray();
+
   }
 
   ngOnDestroy() {
     this.isSorting = false;
     this.stopSound();
     this.sound.src = '';
+  }
+
+  setMaxArrayLength() : number{
+    let screenWidth = window.innerWidth;
+    let maxValue : number;
+    switch (true) {
+      case screenWidth < 768: // Small devices 
+      maxValue = 100;
+        break;
+
+      case screenWidth < 1200: // Large and medium devices (desktops, laptops)
+      maxValue = 300;
+      break;
+
+      default: // Extra large devices (large desktops, high-resolution monitors)
+      maxValue = 400;
+    }
+
+    return maxValue;
+
   }
 
   sort() {
@@ -61,13 +87,24 @@ export class SortingAlgosComponent implements OnInit {
   generateArray() {
     //if there is a visualization happening, block this action
     if (!this.isSorting) {
-      this.bars_height_array = [];
-      for (let index = 0; index < this.NUMBER_OF_BARS; index++) {
-        var bar_height = Math.floor(Math.random() * 350) + 1; //random max value based on height of viz container
-
-        this.bars_height_array.push(bar_height);
+      //check if passed number is bigger than max accepted array length
+      if (this.NUMBER_OF_BARS > this.maxArrayLength) {
+        window.alert("Maximum length you can generate is " + this.maxArrayLength + " for better visualization :)");
+        
+      }else {
+        // 25 presents the max number of bars that bar labels are shown, if it is passed, they will become hidden
+        if (this.NUMBER_OF_BARS > 25) {
+          this.hideBarLabelsOnPc = true;
+        }
+        this.bars_height_array = [];
+        for (let index = 0; index < this.NUMBER_OF_BARS; index++) {
+          var bar_height = Math.floor(Math.random() * 350) + 1; //random max value based on height of viz container
+  
+          this.bars_height_array.push(bar_height);
+        }
+        this.bars_array_before_sorting = [...this.bars_height_array];
       }
-      this.bars_array_before_sorting = [...this.bars_height_array];
+      
     }
 
     //when a new array is generated, we need to reset sortedIndexes or bars will stay green
