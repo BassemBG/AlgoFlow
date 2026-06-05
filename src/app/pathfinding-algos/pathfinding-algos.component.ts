@@ -97,7 +97,7 @@ export class PathfindingAlgosComponent implements OnInit {
     let endNode: Node = this.grid[this.END_NODE_ROW][this.END_NODE_COL];
     console.log(this.grid);
 
-    await runDijkstra(this.grid, startNode, endNode, this.vizSpeed);
+    await runDijkstra(this.grid, startNode, endNode, () => this.vizSpeed);
 
     // when we're out of the above function, finding is done so stop sound
     this.stopSound();

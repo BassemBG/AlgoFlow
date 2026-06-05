@@ -1,10 +1,11 @@
 import { Node } from "../models/node.model";
 
-
-export async function runDijkstra(grid: Node[][], startNode: Node, endNode: Node, vizSpeed: number){
-    
-    var latency = 350 - vizSpeed*3;
-
+export async function runDijkstra(
+    grid: Node[][],
+    startNode: Node,
+    endNode: Node,
+    getVizSpeed: () => number
+){
     // mark start node
     startNode.distance = 0;
     console.log("checking sent grid : ", grid);
@@ -17,21 +18,16 @@ export async function runDijkstra(grid: Node[][], startNode: Node, endNode: Node
         i++;
         // Sort the unvisitedNodes based on distance
         unvisitedNodes = unvisitedNodes.sort((a, b) => a.distance - b.distance);
-        //console.log(i, unvisitedNodes);
         
         //get the smallest distance node to explore (startNode in 1st iteration)
         const closestNode = unvisitedNodes.shift();
-        //console.log(closestNode);
 
         //mark current node as visited
-        await sleep(latency);
+        await sleep(350 - getVizSpeed() * 3);
         closestNode!.isVisited = true;
-
 
         //check if this is endNode, stop if true
         if(closestNode == endNode) return;
-        
-        
 
         // check its neighbours and update relative distances based on current distance +1
         const neighbours: Node[] = [];
@@ -54,26 +50,17 @@ export async function runDijkstra(grid: Node[][], startNode: Node, endNode: Node
             if(!node.isVisited) neighbours.push(node) ;
         }
 
-        //keep only unvisited
-        //neighbours.filter(neighbour => !neighbour.isVisited);
-
         // update distance of neighbours, ONLY UNVISITED
         for (const neighbour of neighbours) {
             neighbour.distance = closestNode!.distance + 1;
             // previous node to be used in returning the path
             neighbour.previousNode = closestNode!;
-        }//neighbours distance should be changed in unvisitedNodes
+        }
 
         console.log("("+ closestNode?.row + "," + closestNode?.col + ")" + "-->" , neighbours);
-        
-
     }
-    
-
-
 }
-
 
 export const sleep = (milliseconds: number) => {
     return new Promise(resolve => setTimeout(resolve, milliseconds))
-  }
+}
